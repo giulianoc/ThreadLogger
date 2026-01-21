@@ -31,6 +31,10 @@ thread_local std::shared_ptr<spdlog::logger> gThreadLocalLogger = nullptr;
 ThreadLogger::ThreadLogger(std::shared_ptr<spdlog::logger> next)
 		: _prev(gThreadLocalLogger)
 {
+	LOG_INFO("ThreadLogger builder"
+		", next logger: {}",
+		next ? next->name() : "null"
+	);
 	gThreadLocalLogger = std::move(next);
 }
 
