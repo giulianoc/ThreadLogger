@@ -35,7 +35,8 @@ ThreadLogger::ThreadLogger(std::shared_ptr<spdlog::logger> next)
 		", next logger: {}",
 		next ? next->name() : "null"
 	);
-	gThreadLocalLogger = std::move(next);
+	if (next)
+		gThreadLocalLogger = std::move(next);
 }
 
 ThreadLogger::~ThreadLogger()
@@ -46,7 +47,11 @@ ThreadLogger::~ThreadLogger()
 std::shared_ptr<spdlog::logger> ThreadLogger::get()
 {
 	if (auto lg = gThreadLocalLogger)
+	{
+		if (spdlog::default_logger())
+			SPDLOG_LOGGER_INFO(spdlog::default_logger(), "ThreadLogger::get using thread local logger: {}", lg->name());
 		return lg;
+	}
 	if (auto def = spdlog::default_logger())
 		return def;
 	throw std::runtime_error("No logger configured");
