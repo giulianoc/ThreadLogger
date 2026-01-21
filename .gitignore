@@ -19,7 +19,7 @@ nbproject
 .DS_Store
 
 #ignora i seguenti eseguibili
-examples/trim/trim
+examples/threadLogger/threadLogger
 
 *.cgi
 *.fcgi
