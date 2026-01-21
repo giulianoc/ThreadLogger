@@ -23,8 +23,6 @@
 
 #include "ThreadLogger.h"
 #include <stdexcept>
-#include <spdlog/spdlog.h>
-
 #include <utility>
 
 thread_local std::shared_ptr<spdlog::logger> gThreadLocalLogger = nullptr;

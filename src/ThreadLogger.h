@@ -26,9 +26,7 @@
 
 #include <memory>
 
-namespace spdlog {
-class logger;
-}
+#include <spdlog/spdlog.h>
 
 extern thread_local std::shared_ptr<spdlog::logger> gThreadLocalLogger;
 
