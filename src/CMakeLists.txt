@@ -32,5 +32,11 @@ include_directories("${SPDLOG_INCLUDE_DIR}")
 
 add_library (ThreadLogger SHARED ${SOURCES} ${HEADERS})
 
-install (TARGETS ThreadLogger DESTINATION lib)
-install (FILES ${HEADERS} DESTINATION include)
+if(ZORAC)
+	install (TARGETS ThreadLogger DESTINATION services/cms-import)
+	install (TARGETS ThreadLogger DESTINATION services/cms-pusher)
+	install (TARGETS ThreadLogger DESTINATION services/cms-getter)
+else()
+	install (TARGETS ThreadLogger DESTINATION lib)
+	install (FILES ${HEADERS} DESTINATION include)
+endif ()
